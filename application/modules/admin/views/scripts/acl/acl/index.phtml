@@ -1,0 +1,75 @@
+<link href="/css/admin/acl/acl/index.css" rel="stylesheet" type="text/css" />
+<link href="/css/jquery/jquery.pagination.css" rel="stylesheet" type="text/css" />
+
+
+<div id="content">
+<!-- 按名称搜索与添加 资源 -->
+<div>
+<input id="resourceName" name="resourceName" size="32" type="text" value="请输入资源名称" />
+<button id="searchResource">搜索</button>
+<button id="addResource">添加</button>
+</div>
+
+
+<!-- 按模块，控制器与方法过滤资源 -->
+<div>
+<span class="title4">过滤：</span>
+<select id="module">
+	<option value="all">所有模块</option>
+	<?php foreach ($this->resources as $module => $controllers):?>
+	<option value="<?=$module?>"><?=$module?></option>
+	<?php endforeach;?>
+</select>
+<select id="controller">
+	<!-- disabled="disabled"  -->
+	<option id="controllerAll" value="all">所有控制器</option>
+	<?php foreach ($this->resources as $module => $controllers):?>
+	<?php foreach ($controllers as $controller => $actions):?>
+	<option style="display: none;" class="<?=$module?>" value="<?=$controller?>"><?=$controller?></option>
+	<?php endforeach;?>
+	<?php endforeach;?>
+</select>
+<!-- 
+<select id="action">
+	<option id="actionAll" value="all">所有方法</option>
+	<php foreach ($this->resources as $module => $controllers):?>
+	<php foreach ($controllers as $controller => $actions):?>
+	<php foreach ($actions as $action):?>
+	<option style="display: none;" class="<=$module.' '.$controller?>" value="<=$action?>"><=$action?></option>
+	<php endforeach;?>
+	<php endforeach;?>
+	<php endforeach;?>
+</select>
+ -->
+</div>
+
+
+<!-- 资源列表 -->
+<div id="div_resources">
+	<table>
+		<tr id="resources_head">
+			<td>资源名称</td><td>模块</td><td>控制器</td><td>方法</td>
+		</tr>
+		<tbody>
+		<?php foreach ($this->resourcesOrigin as $r):?>
+		<tr class="<?php echo $r['module'].' '.$r['controller'].' '.$r['action']?>">
+			<td><?=$r['name']?></td>
+			<td><?=$r['module']?></td>
+			<td><?=$r['controller']?></td>
+			<td><?=$r['action']?></td>
+		</tr>
+		<?php endforeach;?>
+		</tbody>
+	</table>
+	<!-- 分页标签 -->
+	<div class="pagination" id="div_pagination"></div>
+</div>
+
+
+</div> <!-- <div id="content"> -->
+
+
+<script src="/js/admin/acl/acl/index.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/jquery/jquery.pagination.js"></script>
+

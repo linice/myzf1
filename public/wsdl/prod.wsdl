@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions name="gcentos" targetNamespace="urn:gcentos" 
+	xmlns:typens="urn:gcentos" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+	<!-- message, begin -->
+	<message name="setProdsBlackOrWhiteByProdIdsRequest">
+		<part name="prodIds" type="xsd:anyType" />
+		<part name="blackOrWhite" type="xsd:anyType" />
+	</message>
+	<message name="setProdsBlackOrWhiteByProdIdsResponse">
+		<part name="result" type="xsd:anyType" />
+	</message>
+	
+	<!-- message, end -->
+	
+
+	<!-- portType, begin -->
+	<portType name="ptProdService">
+		<operation name="setProdsBlackOrWhiteByProdIds">
+			<input message="typens:setProdsBlackOrWhiteByProdIdsRequest"></input>
+			<output message="typens:setProdsBlackOrWhiteByProdIdsResponse"></output>
+		</operation>
+	</portType>
+	<!-- portType, end -->
+
+
+	<!-- binding, begin -->
+	<binding name="bProdService" type="typens:ptProdService">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="setProdsBlackOrWhiteByProdIds">
+			<soap:operation soapAction="urn:setProdsBlackOrWhiteByProdIds" />
+			<input>
+				<soap:body namespace="urn:gcentos" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body namespace="urn:gcentos" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	
+	</binding>
+	<!-- binding, end -->
+	
+
+	<!-- service, begin -->
+	<service name="sProdService">
+		<port binding="typens:bProdService" name="pProdService">
+			<soap:address location="http://www.gcentos.com.cn.dev/soap_prod/prod" />
+		</port>
+	</service>
+	<!-- service, end -->
+</definitions>

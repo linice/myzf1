@@ -1,0 +1,9 @@
+
+RewriteEngine On
+# Never rewrite for existing files, directories and links  
+# 从不为确实存在的文件，文件夹和文件链接进行重定向 
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
